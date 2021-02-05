@@ -29,7 +29,7 @@ public class EditActivity extends AppCompatActivity {
         // Create an intent to contain the results.
         // Pass the data (edited by the user) to the intent.
         // Set the result of the intent.
-        // Finish activity , close screen, and go back
+        // Finish activity, close screen, and go back
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -28,6 +28,8 @@ android {
     }
 }
 
+// You only have to make changes for dependencies here. You almost never have to touch
+// the first build.gradle (Project: SimpleTodoApp) file.
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'

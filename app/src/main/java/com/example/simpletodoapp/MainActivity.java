@@ -31,26 +31,34 @@ public class MainActivity extends AppCompatActivity {
     public static final String KEY_ITEM_POSITION = "item_position";
     public static final int EDIT_TEXT_CODE = 20;
 
-    Button btnAdd;
-    EditText etItem;
+    // VIEW
     RecyclerView rvItems;
+    EditText etItem;
+    Button btnAdd;
 
+    // DATA
     List<String> items;
+
+    // CONTROLLER ? (Confirm to check if true)
     ItemsAdapter itemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Link the activity (screen) to the view (XML file) for this activity
         setContentView(R.layout.activity_main);
 
-        btnAdd = findViewById(R.id.btnAdd);
-        etItem = findViewById(R.id.etItem);
+        // Set each variables by finding the corresponding views in the specified XML file
         rvItems = findViewById(R.id.rvItems);
+        etItem = findViewById(R.id.etItem);
+        btnAdd = findViewById(R.id.btnAdd);
 
+        // Load list of Todo items from file
         loadItems();
 
         ItemsAdapter.OnClickListener onClickListener = new ItemsAdapter.OnClickListener() {
-            // Create the new activity.
+            // Create a new edit activity.
             // Pass the data being edited.
             // Display the activity
             @Override
@@ -65,19 +73,21 @@ public class MainActivity extends AppCompatActivity {
 
         ItemsAdapter.OnLongClickListener onLongClickListener = new ItemsAdapter.OnLongClickListener() {
             // Remove the item.
-            // Notify the adapter that the item was removed.
+            // Notify the adapter that the item was removed
             @Override
             public void onItemLongClicked(int position) {
                 items.remove(position);
                 itemsAdapter.notifyItemRemoved(position);
                 saveItems();
                 Toast.makeText(getApplicationContext(),
-                        "Item removed successfully", Toast.LENGTH_SHORT).show();
+                                    "Item removed successfully", Toast.LENGTH_SHORT).show();
             }
         };
 
         itemsAdapter = new ItemsAdapter(items, onClickListener, onLongClickListener);
         rvItems.setAdapter(itemsAdapter);
+        // LayoutManager tells the RecyclerView how to position items
+        // and when to reuse item views
         rvItems.setLayoutManager(new LinearLayoutManager(this));
 
         // Add user supplied item to list of items.
@@ -93,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 itemsAdapter.notifyItemInserted(items.size() - 1);
                 saveItems();
                 Toast.makeText(getApplicationContext(),
-                                "Item added successfully", Toast.LENGTH_SHORT).show();
+                                 "Item added successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
